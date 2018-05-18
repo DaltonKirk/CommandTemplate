@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Linq;
 
 namespace CommandTemplate.Commands
 {
-    public class QuitCommand : ICommand
+    internal class UndoCommand : ICommand
     {
         public void Action()
         {
-            Environment.Exit(0);
+            InputHandler.history.Last().Undo();
         }
 
         public string Description()
         {
-            return "Quits the application";
+            return "reverts last action if possible";
         }
 
         public void Undo()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't Undo, Undo");
         }
     }
 }

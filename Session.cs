@@ -5,7 +5,6 @@ namespace CommandTemplate
     public class Session
     {
         public bool isRunning { get; set; }
-        private InputHandler input = new InputHandler();
 
         public Session()
         {
@@ -14,7 +13,7 @@ namespace CommandTemplate
 
         public void Update()
         {
-            input.HandleInput(Console.ReadLine());
+            InputHandler.HandleInput(Console.ReadLine());
         }
     }
 }

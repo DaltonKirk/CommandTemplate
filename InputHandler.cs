@@ -1,18 +1,23 @@
-﻿using System;
+﻿using CommandTemplate.Commands;
+using System;
 using System.Collections.Generic;
-using CommandTemplate.Commands;
 
 namespace CommandTemplate
 {
-    public class InputHandler
+    public static class InputHandler
     {
-        public readonly Dictionary<string, ICommand> _commands = new Dictionary<string, ICommand>()
+        public static List<ICommand> history = new List<ICommand>();
+
+        public static Dictionary<string, ICommand> _commands = new Dictionary<string, ICommand>()
         {
             {"quit", new QuitCommand()},
             {"help", new HelpCommand()},
+            {"clear", new ClearCommand()},
+            {"undo", new UndoCommand()},
+            {"change command", new ChangeCommand()},
         };
 
-        public void HandleInput(string input)
+        public static void HandleInput(string input)
         {
             input = input.ToLower();
 
@@ -21,12 +26,12 @@ namespace CommandTemplate
             if (activeCommand != null)
             {
                 activeCommand?.Action();
+                history.Add(activeCommand);
             }
             else
             {
                 Console.WriteLine(input + " is not recognised");
             }
         }
-
     }
 }

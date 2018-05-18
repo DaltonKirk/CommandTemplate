@@ -3,5 +3,9 @@
     public interface ICommand
     {
         void Action();
+
+        void Undo();
+
+        string Description();
     }
 }
